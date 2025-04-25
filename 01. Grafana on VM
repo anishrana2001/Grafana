@@ -1,0 +1,88 @@
+## - **How to install Grafana from YUM Package ?**
+
+### 
+
+```
+wget -q -O gpg.key https://rpm.grafana.com/gpg.key
+sudo rpm --import gpg.key
+```
+###  How to create YUM repo for Grafana
+```
+cat <<EOF>> /etc/yum.repos.d/grafana.repo
+[grafana]
+name=grafana
+baseurl=https://rpm.grafana.com
+repo_gpgcheck=1
+enabled=1
+gpgcheck=1
+gpgkey=https://rpm.grafana.com/gpg.key
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+exclude=*beta*
+EOF
+```
+### Install Grafana 
+```
+yum install grafana -y
+```
+
+### Enable, Start and Check the Status of Grafana
+```
+systemctl enable grafana-server
+systemctl start grafana-server
+systemctl status grafana-server
+```
+
+### Check the VM IP
+```
+ ip a
+```
+
+### Open the Grafana URL
+```
+VM_IP:3000
+```
+### By default credentials are 
+```
+admin/admin
+```
+
+### How to add Data Source
+
+
+```
+ 1. Search for and select the desired data source
+ 2. Give it a meaningful name
+ 3. Tell Grafana where and how you can access the data source
+   a. URL
+   b. Username, Password/API key
+ 4. Save and test
+```
+
+
+## **Uninstalling Grafana on Red Hat and CentOS Systems**
+
+### 1. Stop the Grafana service:
+```
+sudo systemctl stop grafana-server
+```
+### 2. For systems using dnf
+```
+sudo dnf remove -y grafana
+
+- For systems using yum
+sudo yum remove -y grafana
+```
+### 3. Delete Grafana repository files:
+```
+sudo rm /etc/yum.repos.d/grafana.repo
+```
+
+
+### 4. Clean up remaining configuration files and logs:
+
+```
+sudo rm -rf /var/lib/grafana
+sudo rm -rf /var/log/grafana
+sudo rm -rf /etc/grafana
+```
