@@ -87,6 +87,7 @@ http {
     }
   }
 }
+EOF
 ```
 
 ### Docker Compose file
