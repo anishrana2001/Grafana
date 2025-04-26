@@ -1,3 +1,6 @@
+# How to install Grafa in HA mode with the help of Docker Compose
+![image](https://github.com/user-attachments/assets/6dbce0f5-e96f-4d55-9144-923fbdf2a7fd)
+
 ### Grafana Config file
 ```
 cat <<EOF>> /data/conf/grafana.ini
